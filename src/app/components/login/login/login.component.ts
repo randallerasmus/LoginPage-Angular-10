@@ -24,8 +24,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  get formControls() { return this.authForm.controls; }
 
-
+  signIn(){
+    this.isSubmitted = true;
+    if (this.authForm.invalid){
+      return;
+    }
+    this.authService.signIn(this.authForm.value);
+    this.router.navigateByUrl('/admin');
+  }
 
 
 
