@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../../../auth.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+
 
 
 @Component({
@@ -9,15 +12,15 @@ import {HttpClient} from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
-  hide = true;
-  appUser: any;
+  authForm!: FormGroup;
+  isSubmitted  =  false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    const response = this.http.get('localhost:8080/api/v1/registration/');
-    response.subscribe((data) => this.appUser = response);
+
   }
+
 
 
 
