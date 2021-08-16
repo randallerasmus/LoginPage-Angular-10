@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../../auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {RegistrationService} from '../../../registration.service';
+import {User} from '../../../user';
+import {error} from '@angular/compiler/src/util';
 
 
 
@@ -15,7 +18,9 @@ export class LoginComponent implements OnInit {
   authForm!: FormGroup;
   isSubmitted  =  false;
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
+  user = new User();
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder,
+              private regservice: RegistrationService) { }
 
   ngOnInit(): void {
     this.authForm  =  this.formBuilder.group({
@@ -24,15 +29,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
   get formControls() { return this.authForm.controls; }
 
-  signIn(){
-    this.isSubmitted = true;
-    if (this.authForm.invalid){
-      return;
-    }
-    this.authService.signIn(this.authForm.value);
-    this.router.navigateByUrl('/admin');
+
+  loginUser(){
+    // this.isSubmitted = true;
+    // if (this.authForm.invalid){
+    //   return;
+    // }
+    // this.authService.signIn(this.authForm.value);
+    // this.router.navigateByUrl('/admin');
+    this.regservice.loginUserFromRemote(this.user).subscribe(
+      data => console.log('response received'),
+      err => console.log('exception occured')
+    );
+
   }
 
 
