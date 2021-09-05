@@ -20,6 +20,6 @@ export class RegistrationService {
       }
     };
     // const headers = new HttpHeaders({Authorization: 'Basic' + btoa(user.email + ':' + user.password)});
-    return this.http.post<any>('http://localhost:8080/login', user, config);
+    return this.http.post<any>('http://localhost:8080/api/v1/registration/login', user);
   }
 }
