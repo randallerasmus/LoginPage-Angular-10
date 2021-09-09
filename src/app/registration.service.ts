@@ -13,7 +13,7 @@ export class RegistrationService {
   public loginUserFromRemote(user: User): Observable<any> {
     const config = {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem('tokens')}`,
         'Access-Control-Allow-Origin' : '',
         Allow: 'GET',
         'Content-type': 'Application/json',
